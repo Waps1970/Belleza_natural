@@ -1,399 +1,634 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belleza Natural - Cosméticos Puros</title>
+    <title>Belleza Natural | Effective Beauty - Dermocosmética Avanzada</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'brand-bg': '#fefcf5', // Un beige/crema muy claro
-                        'brand-text': '#3a3a3a', // Texto principal oscuro
-                        'brand-primary': '#6d8b74', // Verde natural principal
-                        'brand-secondary': '#a1887f', // Un acento marrón/terracota
-                        'brand-dark': '#4a5c43', // Verde oscuro para títulos
-                    },
-                    fontFamily: {
-                        'sans': ['"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
-                        'serif': ['"Georgia"', 'Cambria', '"Times New Roman"', 'Times', 'serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     
     <style>
+        /* --- DISEÑO VISUAL (Look & Feel Profesional) --- */
+        :root {
+            --primary: #2d5016;        /* Verde Bosque (Autoridad) */
+            --primary-light: #4a7c29;  /* Verde Hoja (Naturaleza) */
+            --accent: #c5a059;         /* Dorado (Lujo/Talika) */
+            --bg-cream: #fcfbf9;       /* Base Crema (Orgánico) */
+            --white: #ffffff;
+            --text-main: #1c1c1c;
+            --text-soft: #555555;
+            --shadow-card: 0 10px 30px rgba(45, 80, 22, 0.06);
+            --radius: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'sans';
-            color: #3a3a3a;
-            background-color: #fefcf5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        h1, h2, h3 {
-            font-family: 'serif';
-            font-weight: 600;
+
+        h1, h2, h3, .brand-font { font-family: 'Playfair Display', serif; }
+
+        /* HEADER */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 0;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
         }
-        .section-title {
-            @apply text-3xl md:text-4xl font-serif text-brand-dark text-center;
+        nav {
+            max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .btn {
-            @apply inline-block px-6 py-3 rounded-md text-white font-semibold transition duration-300 shadow-md;
+        .logo {
+            font-size: 1.6rem; font-weight: 700; color: var(--primary);
+            text-decoration: none; display: flex; align-items: center; gap: 8px;
         }
-        .btn-primary {
-            @apply bg-brand-primary hover:bg-opacity-80;
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-main); font-weight: 500;
+            font-size: 0.9rem; letter-spacing: 0.5px; transition: color 0.3s;
         }
-        .btn-secondary {
-            @apply bg-brand-secondary hover:bg-opacity-80;
+        .nav-links a:hover { color: var(--primary); }
+        
+        .btn-auth {
+            background: var(--primary); color: white !important;
+            padding: 0.6rem 1.5rem; border-radius: 50px;
+            transition: all 0.3s; cursor: pointer;
+        }
+        .btn-auth:hover { background: var(--primary-light); transform: translateY(-2px); }
+
+        /* HERO */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(to right, rgba(255,255,255,0.85), rgba(255,255,255,0.5)), url('https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; padding: 0 10%; margin-top: 60px;
+        }
+        .hero-content { max-width: 650px; animation: fadeIn Up 1s ease; }
+        .hero h1 { font-size: 3.8rem; line-height: 1.1; color: var(--primary); margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.1rem; color: var(--text-soft); margin-bottom: 2.5rem; }
+        
+        .btn-cta {
+            padding: 1rem 2.5rem; background: var(--primary); color: white;
+            text-decoration: none; border-radius: 50px; font-weight: 600;
+            letter-spacing: 1px; transition: 0.3s; display: inline-block;
+        }
+        .btn-cta:hover { background: var(--primary-light); transform: scale(1.05); }
+
+        /* HISTORIA Y MISIÓN */
+        .history-section { padding: 6rem 2rem; background: white; }
+        .history-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .history-text h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--primary); }
+        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .value-card { text-align: center; padding: 1.5rem; background: var(--bg-cream); border-radius: var(--radius); border: 1px solid #eee; }
+        .value-card span { font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block; }
+
+        /* CATÁLOGO */
+        .catalog { padding: 6rem 2rem; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.8rem; color: var(--primary); margin-bottom: 1rem; }
+        .products-grid {
+            max-width: 1280px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem;
+        }
+        .product-card {
+            background: white; border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow-card); transition: 0.4s; display: flex; flex-direction: column;
+        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(45,80,22,0.15); }
+        .product-img { height: 320px; background: #f9f9f9; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .product-card:hover img { transform: scale(1.05); }
+        
+        .product-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .tag { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .product-info h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-main); }
+        .product-info p { font-size: 0.9rem; color: var(--text-soft); margin-bottom: 1rem; flex-grow: 1; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 1rem; margin-top: auto; }
+        .price { font-weight: 700; font-size: 1.1rem; color: var(--primary); }
+
+        /* TESTIMONIOS */
+        .testimonials { background: var(--primary); color: white; padding: 6rem 2rem; }
+        .test-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .test-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 2.5rem; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.2); }
+        .stars { color: var(--accent); margin-bottom: 1rem; letter-spacing: 2px; }
+        .test-quote { font-style: italic; opacity: 0.9; font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem; }
+
+        /* CHATBOT */
+        .chatbot-toggler {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 65px; height: 65px; background: var(--primary);
+            border-radius: 50%; cursor: pointer; border: none;
+            display: flex; align-items: center; justify-content: center;
+            color: white; box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s; z-index: 2000;
+        }
+        .chatbot-toggler:hover { transform: scale(1.1); }
+        
+        .chatbot {
+            position: fixed; right: 35px; bottom: 100px;
+            width: 400px; background: white; border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15); overflow: hidden;
+            opacity: 0; pointer-events: none; transform: scale(0.5); transform-origin: bottom right;
+            transition: all 0.3s ease; z-index: 1999;
+        }
+        body.show-chatbot .chatbot { opacity: 1; pointer-events: auto; transform: scale(1); }
+
+        .chat-header { background: var(--primary); padding: 1.2rem; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header h2 { font-size: 1.1rem; margin: 0; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        
+        .chatbox { height: 420px; overflow-y: auto; padding: 1.5rem; background: #f4f4f4; }
+        .chat { display: flex; list-style: none; margin-bottom: 15px; }
+        .chat p { padding: 12px 16px; border-radius: 15px; max-width: 85%; font-size: 0.95rem; line-height: 1.5; white-space: pre-wrap; }
+        .chat.incoming p { background: white; color: var(--text-main); border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .chat.outgoing { justify-content: flex-end; }
+        .chat.outgoing p { background: var(--primary-light); color: white; border-bottom-right-radius: 2px; }
+
+        .chat-input { padding: 1rem; background: white; border-top: 1px solid #eee; display: flex; gap: 10px; }
+        .chat-input textarea { width: 100%; height: 45px; border: none; outline: none; resize: none; padding: 12px 0; font-family: inherit; font-size: 0.95rem; }
+        .chat-input span { align-self: center; color: var(--primary); font-size: 1.8rem; cursor: pointer; }
+
+        /* MODAL */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 3000; justify-content: center; align-items: center; }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s; }
+        .auth-card { background: white; padding: 2.5rem; width: 90%; max-width: 400px; border-radius: var(--radius); position: relative; }
+        .close-btn-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; }
+        
+        .auth-form input { width: 100%; padding: 1rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+        .auth-form input:focus { border-color: var(--primary); }
+        .auth-form button { width: 100%; padding: 1rem; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-links { position: fixed; top: 65px; left: -100%; background: white; width: 100%; flex-direction: column; padding: 2rem; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+            .nav-links.active { left: 0; }
+            .history-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .chatbot { width: 100%; right: 0; bottom: 0; border-radius: 20px 20px 0 0; height: 80vh; }
+            .chatbox { height: calc(100% - 130px); }
         }
     </style>
 </head>
-<body class="bg-brand-bg text-brand-text">
+<body>
 
-    <header class="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold font-serif text-brand-primary">
-                Belleza Natural
-            </a>
-            
-            <div class="hidden md:flex space-x-6">
-                <a href="#inicio" class="text-brand-text hover:text-brand-primary transition duration-300">Inicio</a>
-                <a href="#sobre-nosotros" class="text-brand-text hover:text-brand-primary transition duration-300">Sobre Nosotros</a>
-                <a href="#mision" class="text-brand-text hover:text-brand-primary transition duration-300">Compromiso</a>
-                <a href="#catalogo" class="text-brand-text hover:text-brand-primary transition duration-300">Catálogo</a>
-                <a href="#testimonios" class="text-brand-text hover:text-brand-primary transition duration-300">Testimonios</a>
-                <a href="#contacto" class="btn btn-primary text-sm py-2 px-4">Contacto</a>
+    <header>
+        <nav>
+            <a href="#" class="logo"><span class="material-symbols-outlined">spa</span> Belleza <span>Natural</span></a>
+            <div class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+                <span class="material-symbols-outlined">menu</span>
             </div>
-
-            <button id="menu-btn" class="md:hidden focus:outline-none">
-                <svg class="w-6 h-6 text-brand-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#history">Filosofía</a></li>
+                <li><a href="#catalog">Productos</a></li>
+                <li><a href="#testimonials">Historias</a></li>
+                <li><a href="#contact">Contacto</a></li>
+                <li id="authContainer"><a class="btn-auth" id="loginOpenBtn">Mi Cuenta</a></li>
+            </ul>
         </nav>
-
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute top-16 left-0 w-full z-40">
-            <a href="#inicio" class="block px-6 py-3 text-brand-text hover:bg-brand-bg">Inicio</a>
-            <a href="#sobre-nosotros" class="block px-6 py-3 text-brand-text hover:bg-brand-bg">Sobre Nosotros</a>
-            <a href="#mision" class="block px-6 py-3 text-brand-text hover:bg-brand-bg">Compromiso</a>
-            <a href="#catalogo" class="block px-6 py-3 text-brand-text hover:bg-brand-bg">Catálogo</a>
-            <a href="#testimonios" class="block px-6 py-3 text-brand-text hover:bg-brand-bg">Testimonios</a>
-            <a href="#contacto" class="block px-6 py-3 text-brand-text hover:bg-brand-bg">Contacto</a>
-        </div>
     </header>
 
-    <main>
-        <section id="inicio" class="pt-24 pb-20 md:pt-32 md:pb-28" style="background-image: url('https://source.unsplash.com/1600x900/?nature,leaves,subtle'); background-size: cover; background-position: center; background-blend-mode: overlay; background-color: rgba(254, 252, 245, 0.8);">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold font-serif text-brand-dark leading-tight">
-                    Cosméticos Puros que Transforman Tu Piel
-                </h1>
-                <p class="mt-6 text-lg md:text-xl max-w-2xl mx-auto text-brand-text">
-                    Descubre el poder transformador de la cosmética natural con productos formulados para revelar tu belleza más auténtica. 
-                </p>
-                <div class="mt-10 space-x-4">
-                    <a href="#catalogo" class="btn btn-primary text-lg">Ver Productos</a>
-                    <a href="#sobre-nosotros" class="btn btn-secondary text-lg">Conócenos</a>
-                </div>
-            </div>
-        </section>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>La Ciencia de la<br>Naturaleza en tu Piel</h1>
+            <p>Tratamientos dermocosméticos orgánicos. Eliminamos manchas, acné y fortalecemos tu belleza con ingredientes puros y resultados garantizados.</p>
+            <a href="#catalog" class="btn-cta">Explorar Colección</a>
+        </div>
+    </section>
 
-        <section id="sobre-nosotros" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">La Belleza que la Naturaleza Tiene para Ti </h2>
-                <p class="text-center max-w-3xl mx-auto mt-4 text-lg">
-                    Nuestra filosofía se basa en 3 pilares: ingredientes puros, respeto por el planeta y resultados reales.
-                </p>
-                
-                <div class="grid md:grid-cols-3 gap-10 mt-16">
-                    <div class="text-center p-6">
-                        <h3 class="text-2xl font-serif text-brand-dark">Ingredientes Poderosos </h3>
-                        <p class="mt-3">
-                            Formulados con extractos botánicos seleccionados y tecnología innovadora que maximiza sus beneficios para nutrir y regenerar tu piel. 
-                        </p>
+    <section id="history" class="history-section">
+        <div class="history-container">
+            <div class="history-img">
+                <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=1000&auto=format&fit=crop" alt="Nuestra Esencia" style="width:100%; border-radius:16px; box-shadow:var(--shadow-card);">
+            </div>
+            <div class="history-text">
+                <h2>Nuestra Esencia</h2>
+                <p>Effective Beauty nació en el corazón de Puebla con una misión clara: demostrar que la cosmética orgánica puede ofrecer resultados dermatológicos reales. Lo que comenzó como una búsqueda personal para tratar manchas difíciles, se convirtió en una línea avalada por la ciencia.</p>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <span class="material-symbols-outlined">science</span>
+                        <h3>Ciencia</h3>
+                        <p>Fórmulas con Talika y Células Madre.</p>
                     </div>
-                    <div class="text-center p-6">
-                        <h3 class="text-2xl font-serif text-brand-dark">Compromiso Ambiental </h3>
-                        <p class="mt-3">
-                            Adoptamos un cuidado ético. Usamos envases de vidrio oscuro reciclables que preservan las fórmulas y minimizan nuestro impacto ambiental. 
-                        </p>
+                    <div class="value-card">
+                        <span class="material-symbols-outlined">eco</span>
+                        <h3>Orgánico</h3>
+                        <p>Libre de parabenos y crueldad animal.</p>
                     </div>
-                    <div class="text-center p-6">
-                        <h3 class="text-2xl font-serif text-brand-dark">Belleza Libre de Crueldad </h3>
-                        <p class="mt-3">
-                            Creemos en la belleza ética. Ninguno de nuestros productos o ingredientes es testeado en animales, nunca. 
-                        </p>
+                    <div class="value-card">
+                        <span class="material-symbols-outlined">verified</span>
+                        <h3>Garantía</h3>
+                        <p>Resultados visibles o tu dinero de vuelta.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="mision" class="py-20 bg-brand-bg">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">Nuestro Compromiso con la Calidad </h2>
-                
-                <div class="grid md:grid-cols-2 gap-12 mt-16 items-center">
-                    <div>
-                        <img src="https://source.unsplash.com/600x400/?laboratory,science,plants" alt="Laboratorio de calidad" class="rounded-lg shadow-xl">
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag" style="font-size: 1rem;">Effective Beauty</span>
+                <h2>Nuestra Colección Experta</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="Crema.jpg" alt="Crema Desmanchadora" onerror="this.src='https://via.placeholder.com/400x400?text=Crema+Desmanchadora'">
                     </div>
-                    <div>
-                        <p class="text-lg leading-relaxed">
-                            En Belleza Natural, la transparencia y la calidad son nuestros pilares. Cada producto pasa por rigurosos controles y está respaldado por certificaciones que garantizan su pureza y efectividad. 
-                        </p>
-                        <ul class="mt-6 space-y-4">
-                            <li class="flex items-start">
-                                <span class="text-brand-primary font-bold text-xl mr-3">✔</span>
-                                <span><strong class="text-brand-dark">Certificaciones Oficiales:</strong> Productos con registro sanitario y avalados por organismos internacionales. </span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-brand-primary font-bold text-xl mr-3">✔</span>
-                                <span><strong class="text-brand-dark">Testeo Riguroso:</strong> Pruebas dermatológicas exhaustivas para garantizar compatibilidad, incluso en pieles sensibles. </span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-brand-primary font-bold text-xl mr-3">✔</span>
-                                <span><strong class="text-brand-dark">Transparencia Total:</strong> Publicamos la lista completa de ingredientes. Sin secretos, sin letra pequeña. </span>
-                            </li>
-                        </ul>
-                        <div class="mt-8 p-6 bg-brand-primary/10 rounded-lg border-l-4 border-brand-primary">
-                            <p class="font-bold text-brand-dark text-lg">Garantía de Satisfacción Total</p>
-                            <p class="mt-2">Si un producto no cumple tus expectativas, te devolvemos el 100% de tu dinero. Así de seguros estamos. </p>
+                    <div class="product-info">
+                        <span class="tag">Facial</span>
+                        <h3>Crema Desmanchadora</h3>
+                        <p>Con Colágeno y Vitamina E. Elimina paño, sol y acné. *Uso obligatorio con bloqueador.</p>
+                        <div class="price-row">
+                            <span class="price">$425 MXN</span>
+                            <a href="#contact" class="material-symbols-outlined" style="color:var(--primary); text-decoration:none;">shopping_bag</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="Rimel dorado.jpg" alt="Mascara Dorada" onerror="this.src='https://via.placeholder.com/400x400?text=Rimel+Talika'">
+                    </div>
+                    <div class="product-info">
+                        <span class="tag">Crecimiento</span>
+                        <h3>Mascara Dorada (Talika)</h3>
+                        <p>Tratamiento premium. Estimula el crecimiento real y destapa folículos.</p>
+                        <div class="price-row">
+                            <span class="price">$340 MXN</span>
+                            <a href="#contact" class="material-symbols-outlined" style="color:var(--primary); text-decoration:none;">shopping_bag</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="Carbon.jpg" alt="Jabón Carbón" onerror="this.src='https://via.placeholder.com/400x400?text=Jabon+Carbon'">
+                    </div>
+                    <div class="product-info">
+                        <span class="tag">Anti-Acné</span>
+                        <h3>Jabón Carbón Activado</h3>
+                        <p>Elimina puntos negros y matifica. Ideal para piel grasa y acné activo.</p>
+                        <div class="price-row">
+                            <span class="price">$140 MXN</span>
+                            <a href="#contact" class="material-symbols-outlined" style="color:var(--primary); text-decoration:none;">shopping_bag</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="Balsamo para pies V1.jpg" alt="Bálsamo Pies" onerror="this.src='https://via.placeholder.com/400x400?text=Balsamo+Pies'">
+                    </div>
+                    <div class="product-info">
+                        <span class="tag">Reparación</span>
+                        <h3>Bálsamo Awesome Feet</h3>
+                        <p>Repara talones agrietados en 5 días. Seguro para pie diabético.</p>
+                        <div class="price-row">
+                            <span class="price">$420 MXN</span>
+                            <a href="#contact" class="material-symbols-outlined" style="color:var(--primary); text-decoration:none;">shopping_bag</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="Rimel mascara.jpg" alt="Rímel Manzana" onerror="this.src='https://via.placeholder.com/400x400?text=Rimel+Verde'">
+                    </div>
+                    <div class="product-info">
+                        <span class="tag">Fortalecedor</span>
+                        <h3>Rímel Tierra Mineral</h3>
+                        <p>Con Células Madre de Manzana. Fortalece y evita la caída. Look natural.</p>
+                        <div class="price-row">
+                            <span class="price">$280 MXN</span>
+                            <a href="#contact" class="material-symbols-outlined" style="color:var(--primary); text-decoration:none;">shopping_bag</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="Rimel.jpg" alt="Rímel Rosa" onerror="this.src='https://via.placeholder.com/400x400?text=Rimel+Rosa'">
+                    </div>
+                    <div class="product-info">
+                        <span class="tag">Longitud</span>
+                        <h3>Rímel Doble Fibra</h3>
+                        <p>Efecto pestaña postiza inmediato con fibras alargadoras. Waterproof.</p>
+                        <div class="price-row">
+                            <span class="price">$260 MXN</span>
+                            <a href="#contact" class="material-symbols-outlined" style="color:var(--primary); text-decoration:none;">shopping_bag</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="catalogo" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">Nuestra Colección Exclusiva </h2>
-                <p class="text-center max-w-3xl mx-auto mt-4 text-lg">
-                    Cada producto ha sido desarrollado con ingredientes de primera calidad para ofrecerte resultados visibles y duraderos. 
-                </p>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-                    
-                    <div class="border border-gray-200 rounded-lg shadow-lg overflow-hidden flex flex-col">
-                        <img src="https://source.unsplash.com/400x300/?face,cream,jar" alt="Crema Aclaradora" class="w-full h-64 object-cover">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-2xl font-serif text-brand-dark">Crema Aclaradora </h3>
-                            <p class="mt-3 flex-grow">Humecta y desvanece manchas de sol, acné o edad. Con colágeno, vit. E y ácido hialurónico. </p>
-                            <p class="mt-4 text-2xl font-semibold text-brand-primary">$40 USD / $680 MXN </p>
-                            <a href="#contacto" class="btn btn-secondary w-full text-center mt-5">Comprar Ahora</a>
-                        </div>
-                    </div>
-
-                    <div class="border border-gray-200 rounded-lg shadow-lg overflow-hidden flex flex-col">
-                        <img src="https://source.unsplash.com/400x300/?feet,balm,lotion" alt="Bálsamo de Pies" class="w-full h-64 object-cover">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-2xl font-serif text-brand-dark">Bálsamo de Pies Regenerador </h3>
-                            <p class="mt-3 flex-grow">Elimina resequedad, grietas y callos. Ideal para pie diabético. Hidratación profunda sin sensación grasosa. </p>
-                            <p class="mt-4 text-2xl font-semibold text-brand-primary">$24 USD / $420 MXN </p>
-                            <a href="#contacto" class="btn btn-secondary w-full text-center mt-5">Comprar Ahora</a>
-                        </div>
-                    </div>
-
-                    <div class="border border-gray-200 rounded-lg shadow-lg overflow-hidden flex flex-col">
-                        <img src="https://source.unsplash.com/400x300/?charcoal,soap,bar" alt="Jabón Carbón Activado" class="w-full h-64 object-cover">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-2xl font-serif text-brand-dark">Jabón de Carbón Activado </h3>
-                            <p class="mt-3 flex-grow">Elimina puntos negros, cierra poros abiertos y controla la grasa y el acné. Ideal para pieles con tendencia acneica. </p>
-                            <p class="mt-4 text-2xl font-semibold text-brand-primary">$11 USD / $185 MXN </p>
-                            <a href="#contacto" class="btn btn-secondary w-full text-center mt-5">Comprar Ahora</a>
-                        </div>
-                    </div>
-
-                    <div class="border border-gray-200 rounded-lg shadow-lg overflow-hidden flex flex-col">
-                        <img src="https://source.unsplash.com/400x300/?mascara,wand,eyelash" alt="Rimel Doble Fibra" class="w-full h-64 object-cover">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-2xl font-serif text-brand-dark">Rimel con Doble Fibra Alargadora </h3>
-                            <p class="mt-3 flex-grow">Orgánico e hipoalergénico con células madre de manzana . Efecto pestaña postiza. 100% a prueba de agua. </p>
-                            <p class="mt-4 text-2xl font-semibold text-brand-primary">$16 USD / $260 MXN </p>
-                            <a href="#contacto" class="btn btn-secondary w-full text-center mt-5">Comprar Ahora</a>
-                        </div>
-                    </div>
-
-                    <div class="border border-gray-200 rounded-lg shadow-lg overflow-hidden flex flex-col">
-                        <img src="https://source.unsplash.com/400x300/?natural,soap,bar" alt="Jabón Aclarador" class="w-full h-64 object-cover">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-2xl font-serif text-brand-dark">Jabón Aclarador </h3>
-                            <p class="mt-3 flex-grow">Ayuda a desvanecer y eliminar manchas profundas en cuello, axilas, codos, rodillas y entrepierna. </p>
-                            <p class="mt-4 text-2xl font-semibold text-brand-primary">$25 USD / $430 MXN </p>
-                            <a href="#contacto" class="btn btn-secondary w-full text-center mt-5">Comprar Ahora</a>
-                        </div>
-                    </div>
-
-                    <div class="border border-gray-200 rounded-lg shadow-lg overflow-hidden flex flex-col">
-                        <img src="https://source.unsplash.com/400x300/?mascara,beauty,product" alt="Rimel Regenerador" class="w-full h-64 object-cover">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-2xl font-serif text-brand-dark">Rimel Regenerador Natural </h3>
-                            <p class="mt-3 flex-grow">Fórmula orgánica que regenera los folículos de manera natural con células madre de manzana activas. </p>
-                            <p class="mt-4 text-2xl font-semibold text-brand-primary">$17 USD / $280 MXN </p>
-                            <a href="#contacto" class="btn btn-secondary w-full text-center mt-5">Comprar Ahora</a>
-                        </div>
-                    </div>
-
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header" style="margin-bottom:2rem;">
+                <h2 style="color:white;">Resultados Reales</h2>
+            </div>
+            <div class="test-grid">
+                <div class="test-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="test-quote">"El paño de mi embarazo no se quitaba con nada. La Crema Desmanchadora fue mi salvación, en 2 meses mi piel cambió."</p>
+                    <h4>- Mariana G.</h4>
+                </div>
+                <div class="test-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="test-quote">"Tengo diabetes y mis pies siempre estaban agrietados. El Bálsamo Awesome Feet es lo único que los mantiene sanos sin arder."</p>
+                    <h4>- Carlos R.</h4>
+                </div>
+                <div class="test-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="test-quote">"Mis pestañas no crecían. El Rímel Dorado con Talika sí funciona, ahora se ven tupidas y largas de verdad."</p>
+                    <h4>- Sofia L.</h4>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="testimonios" class="py-20 bg-brand-bg">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">Testimonios Reales de Clientes </h2>
-                <p class="text-center max-w-3xl mx-auto mt-4 text-lg">
-                    Miles de clientes satisfechos han transformado su piel. Estas son algunas de sus historias. 
-                </p>
-
-                <div class="grid md:grid-cols-3 gap-8 mt-16">
-                    <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-brand-primary">
-                        <p class="italic text-lg">
-                            "Mi piel nunca había estado tan radiante. La crema aclaradora eliminó las manchas que tenía desde hace años y el bálsamo de pies fue milagroso." 
-                        </p>
-                        <p class="mt-6 font-bold text-brand-dark text-right">- Ana G., Ciudad de México </p>
-                    </div>
-                    <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-brand-primary">
-                        <p class="italic text-lg">
-                            "El jabón de carbón activado controló mi acné y me encanta saber que no están testeados en animales. Belleza con conciencia." 
-                        </p>
-                        <p class="mt-6 font-bold text-brand-dark text-right">- Luis M., Buenos Aires </p>
-                    </div>
-                    <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-brand-primary">
-                        <p class="italic text-lg">
-                            "El envío fue rápido y la atención, impecable. Los rímeles orgánicos son increíbles, mis pestañas nunca se habían visto tan largas y saludables." 
-                        </p>
-                        <p class="mt-6 font-bold text-brand-dark text-right">- Carla R., Bogotá </p>
-                    </div>
+    <section id="contact" style="padding: 6rem 2rem; background:white;">
+        <div class="container" style="max-width:800px; text-align:center;">
+            <h2 class="section-title">Agenda tu Pedido</h2>
+            <p class="section-subtitle">Enviamos a toda Latinoamérica. Asesoría personalizada por expertos.</p>
+            
+            <form id="contactForm" style="margin-top:3rem; text-align:left;">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+                    <input type="text" name="name" placeholder="Nombre Completo" required style="width:100%; padding:1rem; border:1px solid #ddd; border-radius:8px;">
+                    <input type="email" name="email" placeholder="Correo Electrónico" required style="width:100%; padding:1rem; border:1px solid #ddd; border-radius:8px;">
                 </div>
+                <textarea name="message" placeholder="¿En qué producto estás interesado?" required style="width:100%; padding:1rem; border:1px solid #ddd; border-radius:8px; height:120px; margin-bottom:1.5rem;"></textarea>
+                <button type="submit" class="btn-cta" style="border:none; width:100%; cursor:pointer;">Enviar Mensaje</button>
+            </form>
+            <div style="margin-top:3rem; display:flex; justify-content:center; gap:2rem; color:var(--text-soft);">
+                <span>📧 wapusito@gmail.com</span>
+                <span>📱 +52 1 55 1959 3760</span>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contacto" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">Comienza Tu Transformación Hoy </h2>
-                <p class="text-center max-w-3xl mx-auto mt-4 text-lg">
-                    ¿Lista para empezar? Contáctanos para hacer tu pedido, resolver dudas o simplemente para saludarnos.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-12 mt-16 max-w-5xl mx-auto bg-brand-bg p-8 md:p-12 rounded-lg shadow-xl">
-                    
-                    <form action="#" method="POST">
-                        <h3 class="text-2xl font-serif text-brand-dark mb-6">Envíanos un Mensaje</h3>
-                        <div class="mb-4">
-                            <label for="name" class="block text-brand-text mb-2">Nombre</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="email" class="block text-brand-text mb-2">Correo Electrónico</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary" required>
-                        </div>
-                        <div class="mb-6">
-                            <label for="message" class="block text-brand-text mb-2">Mensaje</label>
-                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-full text-lg">Enviar Mensaje</button>
-                    </form>
-
-                    <div class="flex flex-col justify-center">
-                        <h3 class="text-2xl font-serif text-brand-dark mb-6">Información de Contacto</h3>
-                        <p class="text-lg mb-4">
-                            Nuestro equipo de atención al cliente está disponible 24/7 para resolver tus dudas al instante. 
-                        </p>
-                        <div class="space-y-3">
-                            <p class="flex items-center text-lg">
-                                <svg class="w-6 h-6 mr-3 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                <span>hola@bellezanatural.com</span>
-                            </p>
-                            <p class="flex items-center text-lg">
-                                <svg class="w-6 h-6 mr-3 text-brand-primary" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.37 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 6.45 17.5 2 12.04 2M16.56 14.8C16.31 15.02 15.29 15.59 14.9 15.72C14.5 15.84 14.1 15.86 13.76 15.78C13.42 15.7 12.6 15.45 11.62 14.56C10.45 13.49 9.81 12.2 9.61 11.85C9.4 11.5 9.56 11.34 9.71 11.19C9.84 11.06 10 10.9 10.16 10.71C10.31 10.53 10.37 10.37 10.5 10.1C10.63 9.83 10.56 9.61 10.47 9.43C10.38 9.25 9.87 7.92 9.67 7.42C9.47 6.91 9.27 7 9.11 7H8.61C8.36 7 8 7.11 7.7 7.4C7.4 7.69 6.8 8.16 6.8 9.1C6.8 10.04 7.73 10.95 7.85 11.13C7.97 11.31 9.47 13.7 11.85 14.65C13.78 15.42 14.37 15.31 14.87 15.25C15.37 15.19 16.34 14.66 16.61 14.3C16.88 13.93 16.88 13.62 16.81 13.5C16.74 13.38 16.65 13.3 16.56 13.22V13.22Z"></path></svg>
-                                <span>+52 1 55 1234 5678</span>
-                            </p>
-                        </div>
-                        
-                        <h4 class="text-xl font-serif text-brand-dark mt-8 mb-4">Síguenos en Redes </h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="text-brand-secondary hover:text-brand-primary" aria-label="Facebook">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"></path></svg>
-                            </a>
-                            <a href="#" class="text-brand-secondary hover:text-brand-primary" aria-label="Instagram">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.7 2 8.3 2.02 7.2 2.07c-1.1.05-1.8.2-2.4.4-.6.3-1.1.6-1.6 1.1-.5.5-.8 1-1.1 1.6-.2.6-.4 1.3-.4 2.4C2.02 8.3 2 8.7 2 12s.02 3.7.07 4.8c.05 1.1.2 1.8.4 2.4.3.6.6 1.1 1.1 1.6.5.5 1 .8 1.6 1.1.6.2 1.3.4 2.4.4 1.1.05 1.5.07 4.8.07s3.7-.02 4.8-.07c1.1-.05 1.8-.2 2.4-.4.6-.3 1.1-.6 1.6-1.1.5-.5.8-1 1.1-1.6.2-.6.4-1.3.4-2.4.05-1.1.07-1.5.07-4.8s-.02-3.7-.07-4.8c-.05-1.1-.2-1.8-.4-2.4-.3-.6-.6-1.1-1.1-1.6-.5-.5-1-.8-1.6-1.1-.6-.2-1.3-.4-2.4-.4C13.7 2.02 13.3 2 12 2zm0 1.8c3.2 0 3.6 0 4.8.07 1 .05 1.5.2 1.9.4.4.2.7.4 1 .7.3.3.5.6.7 1 .2.4.4.9.4 1.9.07 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.05 1-.2 1.5-.4 1.9-.2.4-.4.7-.7 1-.3.3-.6.5-1 .7-.4.2-.9.4-1.9.4-1.2.07-1.6.07-4.8.07s-3.6 0-4.8-.07c-1-.05-1.5-.2-1.9-.4-.4-.2-.7-.4-1-.7-.3-.3-.5-.6-.7-1-.2-.4-.4-.9-.4-1.9C4.02 15.6 4 15.2 4 12s0-3.6.07-4.8c.05-1 .2-1.5.4-1.9.2-.4.4-.7.7-1 .3-.3.6-.5 1-.7.4-.2.9-.4 1.9-.4 1.2-.07 1.6-.07 4.8-.07zM12 7.2c-2.6 0-4.8 2.2-4.8 4.8s2.2 4.8 4.8 4.8 4.8-2.2 4.8-4.8-2.2-4.8-4.8-4.8zm0 7.8c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3zm6.2-8.2c-.6 0-1.1.5-1.1 1.1s.5 1.1 1.1 1.1 1.1-.5 1.1-1.1-.5-1.1-1.1-1.1z"></path></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="bg-brand-dark text-brand-bg py-16">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-12">
-                <div>
-                    <h3 class="text-2xl font-bold font-serif text-white">Belleza Natural</h3>
-                    <p class="mt-4 text-sm opacity-80">
-                        Donde la ciencia y la naturaleza se encuentran para revelar tu mejor versión. 
-                    </p>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold text-white">Enlaces Rápidos</h4>
-                    <ul class="mt-4 space-y-2">
-                        <li><a href="#inicio" class="opacity-80 hover:opacity-100 hover:text-white transition duration-300">Inicio</a></li>
-                        <li><a href="#sobre-nosotros" class="opacity-80 hover:opacity-100 hover:text-white transition duration-300">Sobre Nosotros</a></li>
-                        <li><a href="#catalogo" class="opacity-80 hover:opacity-100 hover:text-white transition duration-300">Catálogo</a></li>
-                        <li><a href="#testimonios" class="opacity-80 hover:opacity-100 hover:text-white transition duration-300">Testimonios</a></li>
-                        <li><a href="#contacto" class="opacity-80 hover:opacity-100 hover:text-white transition duration-300">Contacto</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-semibold text-white">Nuestra Promesa</h4>
-                    <ul class="mt-4 space-y-3">
-                        <li class="flex items-center opacity-80">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span>Soporte 24/7 </span>
-                        </li>
-                        <li class="flex items-center opacity-80">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span>Compra Protegida </span>
-                        </li>
-                        <li class="flex items-center opacity-80">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H4a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                            <span>Pago Seguro </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="mt-12 pt-8 border-t border-gray-700 text-center">
-                <p class="text-sm opacity-60">
-                    &copy; 2025 Belleza Natural. Todos los derechos reservados.
-                </p>
-            </div>
+    <footer>
+        <div style="background:#1a1a1a; color:white; padding:3rem; text-align:center;">
+            <p class="brand-font" style="font-size:1.5rem; margin-bottom:1rem;">Belleza Natural</p>
+            <p style="font-size:0.9rem; opacity:0.7;">&copy; 2025 Effective Beauty. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <script>
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = mobileMenu.querySelectorAll('a');
+    <button class="chatbot-toggler">
+        <span class="material-symbols-outlined">medical_services</span>
+    </button>
+    <div class="chatbot">
+        <div class="chat-header">
+            <h2><span class="material-symbols-outlined">smart_toy</span> Dermatólogo Virtual</h2>
+            <span class="material-symbols-outlined close-btn" style="cursor:pointer;">close</span>
+        </div>
+        <ul class="chatbox">
+            <li class="chat incoming">
+                <span class="material-symbols-outlined">medical_services</span>
+                <p>Hola 👋 Soy el especialista de Belleza Natural.<br><br>Puedo crear una rutina para ti basada en:<br>1. <b>Manchas/Paño</b><br>2. <b>Acné/Grasa</b><br>3. <b>Pestañas</b> (Crecimiento/Fortalecimiento)<br>4. <b>Pies</b> (Grietas/Callos)<br><br>¿Qué te preocupa hoy?</p>
+            </li>
+        </ul>
+        <div class="chat-input">
+            <textarea placeholder="Escribe aquí..." required></textarea>
+            <span class="material-symbols-outlined" id="send-btn">send</span>
+        </div>
+    </div>
 
-        function toggleMenu() {
-            mobileMenu.classList.toggle('hidden');
+    <div id="authModal" class="modal-overlay">
+        <div class="auth-card">
+            <span class="material-symbols-outlined close-btn-modal" id="closeModal">close</span>
+            <div style="text-align:center; margin-bottom:2rem;">
+                <h3 style="color:var(--primary);">Bienvenido</h3>
+                <p style="font-size:0.9rem; color:var(--text-soft);">Regístrate para seguimiento personalizado</p>
+            </div>
+            
+            <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:1.5rem; border-bottom:1px solid #eee;">
+                <button class="auth-tab active" data-tab="login" style="background:none; border:none; padding:10px; font-weight:600; cursor:pointer; color:var(--primary); border-bottom:2px solid var(--primary);">Ingresar</button>
+                <button class="auth-tab" data-tab="register" style="background:none; border:none; padding:10px; cursor:pointer; color:#aaa;">Registrarse</button>
+            </div>
+
+            <form id="loginForm" class="auth-form active">
+                <input type="email" name="email" placeholder="Correo" required style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
+                <input type="password" name="password" placeholder="Contraseña" required style="width:100%; padding:10px; margin-bottom:20px; border:1px solid #ddd; border-radius:5px;">
+                <button type="submit" style="width:100%; padding:12px; background:var(--primary); color:white; border:none; border-radius:5px; cursor:pointer;">Iniciar Sesión</button>
+            </form>
+
+            <form id="registerForm" class="auth-form" style="display:none;">
+                <input type="text" name="fullName" placeholder="Nombre Completo" required style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
+                <input type="tel" name="phone" placeholder="Teléfono" required style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
+                <input type="email" name="email" placeholder="Correo" required style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
+                <input type="password" name="password" placeholder="Contraseña (min 6 caracteres)" required style="width:100%; padding:10px; margin-bottom:20px; border:1px solid #ddd; border-radius:5px;">
+                <button type="submit" style="width:100%; padding:12px; background:var(--primary); color:white; border:none; border-radius:5px; cursor:pointer;">Crear Cuenta</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, setDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // CONFIGURACIÓN FIREBASE (NO MODIFICAR)
+        const firebaseConfig = {
+            apiKey: "AIzaSyB0jnDMdhF2MzqXmbq1V-BScBI_dPjrpiI",
+            authDomain: "proyecto-de-finalizacion-e1472.firebaseapp.com",
+            projectId: "proyecto-de-finalizacion-e1472",
+            storageBucket: "proyecto-de-finalizacion-e1472.firebasestorage.app",
+            messagingSenderId: "978284871776",
+            appId: "1:978284871776:web:6f7ef9a50e9af663958305"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // --- LÓGICA DE REGISTRO (CORREGIDA) ---
+        const registerForm = document.getElementById('registerForm');
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fd = new FormData(registerForm);
+            const name = fd.get('fullName');
+            const phone = fd.get('phone');
+            const email = fd.get('email');
+            const pass = fd.get('password');
+
+            try {
+                const cred = await createUserWithEmailAndPassword(auth, email, pass);
+                // Guardar en Firestore 'usuarios'
+                await setDoc(doc(db, "usuarios", cred.user.uid), {
+                    nombre: name,
+                    telefono: phone,
+                    email: email,
+                    fecha: serverTimestamp()
+                });
+                alert("¡Registro Exitoso! Bienvenido a la familia Effective Beauty.");
+                document.getElementById('authModal').style.display = 'none';
+                registerForm.reset();
+            } catch (err) {
+                console.error(err);
+                alert("Error: " + err.message);
+            }
+        });
+
+        // --- LÓGICA LOGIN ---
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await signInWithEmailAndPassword(auth, new FormData(loginForm).get('email'), new FormData(loginForm).get('password'));
+                document.getElementById('authModal').style.display = 'none';
+                alert("Sesión iniciada");
+            } catch (err) { alert("Credenciales incorrectas"); }
+        });
+
+        // --- UI STATE AUTH ---
+        const authBtn = document.getElementById('loginOpenBtn');
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+                authBtn.innerText = "Cerrar Sesión";
+                authBtn.onclick = () => signOut(auth);
+            } else {
+                authBtn.innerText = "Mi Cuenta";
+                authBtn.onclick = () => document.getElementById('authModal').style.display = 'flex';
+            }
+        });
+
+        // --- CONTACT FORM ---
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerText = "Enviando...";
+            try {
+                await addDoc(collection(db, "contactos"), {
+                    nombre: new FormData(e.target).get('name'),
+                    email: new FormData(e.target).get('email'),
+                    mensaje: new FormData(e.target).get('message'),
+                    fecha: serverTimestamp()
+                });
+                alert("Mensaje enviado correctamente");
+                e.target.reset();
+            } catch(err) { console.error(err); }
+            btn.innerText = "Enviar Mensaje";
+        });
+
+        // --- MODAL TABS ---
+        const tabs = document.querySelectorAll('.auth-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.auth-tab').forEach(t => { t.classList.remove('active'); t.style.borderBottom='none'; t.style.color='#aaa'; });
+                document.querySelectorAll('.auth-form').forEach(f => f.style.display = 'none');
+                
+                tab.classList.add('active');
+                tab.style.borderBottom = '2px solid var(--primary)';
+                tab.style.color = 'var(--primary)';
+                document.getElementById(tab.dataset.tab + 'Form').style.display = 'block';
+            });
+        });
+        document.getElementById('closeModal').onclick = () => document.getElementById('authModal').style.display = 'none';
+    </script>
+
+    <script>
+        const chatbotToggler = document.querySelector(".chatbot-toggler");
+        const closeBtn = document.querySelector(".close-btn");
+        const chatbox = document.querySelector(".chatbox");
+        const chatInput = document.querySelector(".chat-input textarea");
+        const sendChatBtn = document.querySelector("#send-btn");
+
+        let userMessage = null;
+
+        // BASE DE CONOCIMIENTOS (Extraída del documento )
+        const knowledgeBase = [
+            // CASO 1: MANCHAS (Crema + Jabón Aclarante)
+            {
+                keys: ["mancha", "paño", "sol", "aclarar", "pecas", "melasma", "crema"],
+                resp: "👨‍⚕️ <b>Diagnóstico:</b> Para hiperpigmentación (manchas por sol, paño, acné), tu tratamiento ideal es la <b>Crema Desmanchadora ($425 MXN)</b>.<br><br>🔬 <b>Ciencia:</b> Contiene Colágeno y Vitamina E. Úsala de noche.<br>⚠️ <b>Advertencia Médica:</b> Es OBLIGATORIO usar protector solar de día.<br><br>💡 <b>Tip Pro:</b> Combínala con el <b>Jabón Aclarante ($125)</b> en la ducha para preparar la piel."
+            },
+            // CASO 2: ACNÉ (Jabón Carbón)
+            {
+                keys: ["acné", "granos", "grasa", "puntos negros", "brillo", "carbón"],
+                resp: "👨‍⚕️ <b>Diagnóstico:</b> Para piel grasa o con tendencia acneica, prescribo el <b>Jabón de Carbón Activado ($140 MXN)</b>.<br><br>🔬 <b>Acción:</b> Funciona por adsorción (como un imán) para sacar la grasa del poro y matificar.<br><br>¿Te gustaría saber cómo usarlo para no resecar tu piel?"
+            },
+            // CASO 3: PESTAÑAS (Diagnóstico Diferencial)
+            {
+                keys: ["pestaña", "rímel", "rimel", "crecer", "caen", "cortas"],
+                resp: "Para pestañas tengo 3 tratamientos según tu necesidad:<br><br>1. <b>¿Pocas/Cortas?</b> Usa <b>Mascara Dorada ($340)</b>. Contiene TALIKA para estimular crecimiento real.<br>2. <b>¿Débiles/Se caen?</b> Usa <b>Rímel Verde ($280)</b>. Tiene Células Madre para fortalecer.<br>3. <b>¿Evento especial?</b> Usa <b>Rímel Rosa ($260)</b>. Tiene fibras para largo inmediato.<br><br>¿Cuál describe mejor tu caso?"
+            },
+            // CASO 4: PIES (Bálsamo)
+            {
+                keys: ["pies", "talones", "grietas", "callos", "diabético", "bálsamo"],
+                resp: "👨‍⚕️ <b>Tratamiento:</b> Para hiperqueratosis (callos) y grietas, usa el <b>Bálsamo Awesome Feet ($420 MXN)</b>.<br><br>⏱️ <b>Eficacia:</b> Resultados visibles en 2-5 días. Es hipoalergénico y 100% seguro para pie diabético.<br>Aplícalo de noche."
+            },
+            // ZONAS DIFÍCILES
+            {
+                keys: ["axila", "cuello", "entrepierna", "codo", "negro"],
+                resp: "Para zonas de fricción (axilas, cuello, entrepierna), el <b>Jabón Aclarante ($125 MXN)</b> es el especialista. Úsalo diariamente en la ducha sin tallar fuerte."
+            },
+            // PRECIOS
+            {
+                keys: ["precio", "costo", "cuanto"],
+                resp: "📋 <b>Lista de Precios Oficial:</b><br>• Crema Desmanchadora: $425<br>• Bálsamo Pies: $420<br>• Rímel Dorado (Crecimiento): $340<br>• Rímel Verde (Fortalecedor): $280<br>• Rímel Rosa (Fibras): $260<br>• Jabón Carbón: $140<br>• Jabón Aclarante: $125<br><br>¿Te interesa algún kit?"
+            },
+            // CONTACTO
+            {
+                keys: ["comprar", "pedir", "envío", "whatsapp"],
+                resp: "📦 Enviamos a todo México y Latinoamérica. Puedes pedir aquí o por WhatsApp al <b>+52 1 55 1959 3760</b>."
+            },
+            // SALUDO
+            {
+                keys: ["hola", "buenos", "buenas"],
+                resp: "¡Hola! Soy tu Dermatólogo Virtual de Effective Beauty. 🌿<br><br>Cuéntame, ¿qué te gustaría mejorar hoy? (Manchas, Acné, Pestañas o Pies)"
+            }
+        ];
+
+        const createChatLi = (message, className) => {
+            const chatLi = document.createElement("li");
+            chatLi.classList.add("chat", className);
+            let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">medical_services</span><p></p>`;
+            chatLi.innerHTML = chatContent;
+            chatLi.querySelector("p").innerHTML = message;
+            return chatLi;
         }
 
-        // Toggle al hacer clic en el botón de hamburguesa
-        menuBtn.addEventListener('click', toggleMenu);
+        const generateResponse = (userMsg) => {
+            const lowerMsg = userMsg.toLowerCase();
+            const match = knowledgeBase.find(obj => obj.keys.some(key => lowerMsg.includes(key)));
+            if(match) return match.resp;
+            return "Entiendo. Como experto en dermocosmética, necesito más detalles. ¿Tu consulta es sobre <b>Manchas faciales, Acné, Crecimiento de pestañas</b> o <b>Pies resecos</b>?";
+        }
 
-        // Ocultar menú al hacer clic en un enlace (para navegación en la misma página)
-        navLinks.forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
+        const handleChat = () => {
+            userMessage = chatInput.value.trim();
+            if(!userMessage) return;
+            chatInput.value = "";
+            
+            chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+
+            setTimeout(() => {
+                const incomingChatLi = createChatLi("Analizando tu piel...", "incoming");
+                chatbox.appendChild(incomingChatLi);
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+                setTimeout(() => {
+                    incomingChatLi.querySelector("p").innerHTML = generateResponse(userMessage);
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+                }, 600);
+            }, 400);
+        }
+
+        sendChatBtn.addEventListener("click", handleChat);
+        chatInput.addEventListener("keydown", (e) => { if(e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleChat(); }});
+        chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+        closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
     </script>
 
 </body>
